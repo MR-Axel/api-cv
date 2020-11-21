@@ -1,10 +1,10 @@
-Bienvenido a mi CV por API
+Welcome to my API CV!
 
-Pueden encontrar la aplicación en:
+You can find the API running on:
 https://cv-axel-api.herokuapp.com/
 
-Pueden ver mi CV haciendo GET en:
+For GET my CV try:
 https://cv-axel-api.herokuapp.com/curriculum
 
-Para dejarme un mensaje, POST con un body a:
-https://cv-axel-api.herokuapp.com/mensajes
+For POST a message try (with body):
+https://cv-axel-api.herokuapp.com/message

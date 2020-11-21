@@ -2,3 +2,4 @@ __pycache__/
 .env
 virtenv/
 .vscode/
+mail_config.py

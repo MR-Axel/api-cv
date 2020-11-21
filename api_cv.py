@@ -2,17 +2,28 @@
 # -*- coding: utf-8 -*-
 
 from flask import Flask, jsonify, request, abort
+from flask_mail import Mail, Message
+import mail_config
 
 app = Flask(__name__)
 app.config['JSON_SORT_KEYS'] = False
 app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
 
+mail = Mail(app)
+
+app.config['MAIL_SERVER'] = mail_config.mail_server
+app.config['MAIL_PORT'] =  mail_config.port_number
+app.config['MAIL_USERNAME'] = mail_config.mail_username
+app.config['MAIL_PASSWORD'] = mail_config.mail_password
+app.config['MAIL_USE_TLS'] = mail_config.mail_use_tls
+app.config['MAIL_USE_SSL'] = mail_config.mail_use_ssl
+
 
 @app.route('/')
 def index():
     info = {
-        "mensaje": "Welcome to the Axel CV API",
-        "acciones": [
+        "message": "Welcome to the Axel CV API",
+        "actions": [
             "GET /curriculum",
             "POST /message"
         ]
@@ -87,16 +98,31 @@ def cv():
     return jsonify(cv)
 
 
+def sendMessage(mensaje):
+    #TODO: Connect to mail account
+    try:
+        msg = Message("New message from API CV",
+            sender = mail_config.mail_username,
+            recipients = [mail_config.mail_username])
+        msg.body = mensaje
+        mail.send(msg)
+        print("CONTACT MESSAGE: " + str(mensaje))
+        return True
+    except:
+        return False
+
+
 @app.route('/message', methods=['POST'])
-def contacto():
+def contact():
     mensaje = request.get_data()
 
     if not mensaje:
         abort(400, description="You must send the message in the body of the POST")
 
-    print("CONTACT MESSAGE: " + str(mensaje))
-    return "Thanks for your message."
-
+    if (sendMessage(mensaje)):
+        return "Thanks for your message."
+    else:
+        return "Error: Try later!"
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug = True)

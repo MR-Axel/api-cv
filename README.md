@@ -6,5 +6,5 @@ https://cv-axel-api.herokuapp.com/
 For GET my CV try:
 https://cv-axel-api.herokuapp.com/curriculum
 
-For send me a message complete the body and POST:
+For send me a message complete the body and POST (not available):
 https://cv-axel-api.herokuapp.com/message

@@ -3,7 +3,7 @@
 
 from flask import Flask, jsonify, request, abort
 from flask_mail import Mail, Message
-import mail_config
+# import mail_config
 
 app = Flask(__name__)
 app.config['JSON_SORT_KEYS'] = False
@@ -115,15 +115,15 @@ def sendMessage(mensaje):
 @app.route('/message', methods=['POST'])
 def contact():
     mensaje = request.get_data()
+    #! Descomentar para configurar mail_config.py
+    # if not mensaje:
+    #     abort(400, description="You must send the message in the body of the POST")
 
-    if not mensaje:
-        abort(400, description="You must send the message in the body of the POST")
-
-    if (sendMessage(mensaje)):
-        return "Thanks for your message."
-    else:
-        return "Error: Try later!"
-    # return "Thanks for your message."
+    # if (sendMessage(mensaje)):
+    #     return "Thanks for your message."
+    # else:
+    #     return "Error: Try later!"
+    return "Thanks for your message."
 
 
 if __name__ == "__main__":

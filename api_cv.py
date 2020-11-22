@@ -9,14 +9,15 @@ app = Flask(__name__)
 app.config['JSON_SORT_KEYS'] = False
 app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
 
-mail = Mail(app)
+#! Descomentar para configurar mail
+# mail = Mail(app)
 
-app.config['MAIL_SERVER'] = mail_config.mail_server
-app.config['MAIL_PORT'] =  mail_config.port_number
-app.config['MAIL_USERNAME'] = mail_config.mail_username
-app.config['MAIL_PASSWORD'] = mail_config.mail_password
-app.config['MAIL_USE_TLS'] = mail_config.mail_use_tls
-app.config['MAIL_USE_SSL'] = mail_config.mail_use_ssl
+# app.config['MAIL_SERVER'] = mail_config.mail_server
+# app.config['MAIL_PORT'] =  mail_config.port_number
+# app.config['MAIL_USERNAME'] = mail_config.mail_username
+# app.config['MAIL_PASSWORD'] = mail_config.mail_password
+# app.config['MAIL_USE_TLS'] = mail_config.mail_use_tls
+# app.config['MAIL_USE_SSL'] = mail_config.mail_use_ssl
 
 
 @app.route('/')
@@ -98,18 +99,18 @@ def cv():
     return jsonify(cv)
 
 
-def sendMessage(mensaje):
-    #TODO: Connect to mail account
-    try:
-        msg = Message("New message from API CV",
-            sender = mail_config.mail_username,
-            recipients = [mail_config.mail_username])
-        msg.body = mensaje
-        mail.send(msg)
-        print("CONTACT MESSAGE: " + str(mensaje))
-        return True
-    except:
-        return False
+# def sendMessage(mensaje):
+#     #TODO: Connect to mail account
+#     try:
+#         msg = Message("New message from API CV",
+#             sender = mail_config.mail_username,
+#             recipients = [mail_config.mail_username])
+#         msg.body = mensaje
+#         mail.send(msg)
+#         print("CONTACT MESSAGE: " + str(mensaje))
+#         return True
+#     except:
+#         return False
 
 
 @app.route('/message', methods=['POST'])

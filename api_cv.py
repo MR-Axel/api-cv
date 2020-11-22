@@ -123,7 +123,7 @@ def contact():
     #     return "Thanks for your message."
     # else:
     #     return "Error: Try later!"
-    return "Thanks for your message."
+    return "Thanks for your message (Coming soon)"
 
 
 if __name__ == "__main__":

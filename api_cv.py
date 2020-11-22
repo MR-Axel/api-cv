@@ -126,4 +126,4 @@ def contact():
     # return "Thanks for your message."
 
 if __name__ == "__main__":
-    app.run(debug = True)
+    app.run()
